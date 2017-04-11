@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_signup"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/name"
+        android:layout_width="match_parent"
+        android:hint="@string/full_name"
+        android:layout_marginRight="32dp"
+        style="@style/materialEditText"
+        android:layout_marginTop="16dp"
+        android:inputType="textPersonName"
+        android:layout_height="wrap_content" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/phone_no"
+        android:layout_width="match_parent"
+        android:layout_marginRight="32dp"
+        android:inputType="phone"
+        style="@style/materialEditText"
+        android:layout_marginTop="16dp"
+        android:hint="@string/phone_number"
+        android:layout_height="wrap_content" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/email_id"
+        android:layout_width="match_parent"
+        android:inputType="textEmailAddress"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        style="@style/materialEditText"
+        android:hint="@string/email_id"
+        android:layout_height="wrap_content" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/username"
+        android:layout_width="match_parent"
+        android:layout_marginRight="32dp"
+        android:inputType="text"
+        style="@style/materialEditText"
+        android:layout_marginTop="16dp"
+        android:hint="@string/username"
+        android:layout_height="wrap_content" />
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/password"
+        android:layout_width="match_parent"
+        android:layout_marginRight="32dp"
+        android:layout_marginTop="16dp"
+        style="@style/materialEditText"
+        android:hint="@string/password"
+        android:inputType="textPassword"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:text="@string/submit"/>
+
+
+
+</LinearLayout>

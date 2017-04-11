@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Letsreview</string>
+    <string name="full_name">Full Name*</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="email_id">Email Id*</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="password">Password*</string>
+    <string name="username">Username*</string>
+    <string name="submit">Submit</string>
+    <string name="error_msg_valid_name">enter valid name</string>
+    <string name="error_msg_valid_phone_no">enter valid phone number</string>
+    <string name="error_msg_valid_email_id">enter valid email id</string>
+    <string name="error_msg_valid_username">username should be between 8-30 characters and can only contain alphanumerics</string>
+    <string name="error_msg_valid_password">password should be between 8-30 characters</string>
+</resources>
