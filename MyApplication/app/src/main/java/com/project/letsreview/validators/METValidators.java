@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class METValidators {
     private static final String PERSON_NAME_PATTERN = "^([a-zA-Z]{1})([a-zA-Z. ]{0,29})";
     private static final String PHONE_NUMBER_PATTERN = "^([7-9]{1})([0-9]{9})$";
-    private static final String USER_NAME_PATTERN = "^[a-zA-Z0-9]{8,30}$";
+    private static final String USER_NAME_PATTERN = "^[a-zA-Z0-9]{1,30}$";
     private static final String PASSWORD_PATTERN = "^.{8,30}$";
 
 

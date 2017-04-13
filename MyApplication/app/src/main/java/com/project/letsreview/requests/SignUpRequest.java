@@ -9,7 +9,7 @@ import java.io.Serializable;
 public class SignUpRequest implements Serializable{
 
     private String name;
-    private String phone_on;
+    private String phone_no;
     private String email_id;
     private String username;
     private String password;
@@ -22,12 +22,12 @@ public class SignUpRequest implements Serializable{
         this.name = name;
     }
 
-    public String getPhone_on() {
-        return phone_on;
+    public String getPhone_no() {
+        return phone_no;
     }
 
-    public void setPhone_on(String phone_on) {
-        this.phone_on = phone_on;
+    public void setPhone_no(String phone_no) {
+        this.phone_no = phone_no;
     }
 
     public String getEmail_id() {

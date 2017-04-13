@@ -10,7 +10,7 @@
 
     <style name="materialEditText">
         <item name="met_baseColor">#0056d3</item>
-        <item name="met_primaryColor">#982360</item>
+        <item name="met_primaryColor">#0056d3</item>
         <item name="met_errorColor">#ddaa00</item>
         <item name="met_floatingLabel">normal</item>
     </style>

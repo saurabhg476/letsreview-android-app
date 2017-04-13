@@ -53,9 +53,10 @@ public class SignUpActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                validate();
-                SignUpRequest request = generateRequest();
-                callApi(request);
+                if(validate()) {
+                    SignUpRequest request = generateRequest();
+                    callApi(request);
+                }
             }
         });
 
@@ -71,7 +72,7 @@ public class SignUpActivity extends AppCompatActivity {
         request.setName(name.getText().toString());
 
         if(phoneNumber.getText() != null) {
-            request.setPhone_on(phoneNumber.getText().toString());
+            request.setPhone_no(phoneNumber.getText().toString());
         }
 
         request.setEmail_id(emailId.getText().toString());
@@ -81,7 +82,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void callApi(SignUpRequest request){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.100:8080/letsreview/")
+        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.6:8080/letsreview/")
                 .addConverterFactory(GsonConverterFactory.create()).build();
         APIService apiService = retrofit.create(APIService.class);
         Call<GenericResponse> result = apiService.createUser(request);

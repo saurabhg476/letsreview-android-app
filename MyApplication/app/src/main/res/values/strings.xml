@@ -12,4 +12,8 @@
     <string name="error_msg_valid_email_id">enter valid email id</string>
     <string name="error_msg_valid_username">username should be between 8-30 characters and can only contain alphanumerics</string>
     <string name="error_msg_valid_password">password should be between 8-30 characters</string>
+    <string name="sample_review">Novopay is a very good company. You get to interact with some very smart people there.
+    Since they always work with latest technologies, you get to learn a lot</string>
+    <string name="sample_rating">Rating: 3</string>
+    <string name="sample_name">Saurabh Gupta</string>
 </resources>
