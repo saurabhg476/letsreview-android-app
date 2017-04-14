@@ -12,6 +12,22 @@ public class GetReviewsResponse extends GenericResponse{
     private String topicName;
     private List<Review> list;
 
+    public String getTopicName() {
+        return topicName;
+    }
+
+    public void setTopicName(String topicName) {
+        this.topicName = topicName;
+    }
+
+    public List<Review> getList() {
+        return list;
+    }
+
+    public void setList(List<Review> list) {
+        this.list = list;
+    }
+
     public static class Review{
         private String body;
         private Date created_on;

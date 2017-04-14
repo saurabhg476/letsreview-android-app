@@ -1,4 +1,4 @@
-package com.project.letsreview;
+package com.project.letsreview.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,11 +6,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.project.letsreview.APIService;
+import com.project.letsreview.R;
 import com.project.letsreview.requests.SignUpRequest;
 import com.project.letsreview.responses.GenericResponse;
 import com.project.letsreview.validators.METValidators;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
+import java.util.concurrent.TimeUnit;
+
+import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -82,7 +87,12 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void callApi(SignUpRequest request){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("http://192.168.0.6:8080/letsreview/")
+        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .readTimeout(60, TimeUnit.SECONDS)
+                .connectTimeout(60, TimeUnit.SECONDS)
+                .build();
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(APIService.BASE_URL)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create()).build();
         APIService apiService = retrofit.create(APIService.class);
         Call<GenericResponse> result = apiService.createUser(request);

@@ -16,4 +16,7 @@
     Since they always work with latest technologies, you get to learn a lot</string>
     <string name="sample_rating">Rating: 3</string>
     <string name="sample_name">Saurabh Gupta</string>
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="app_label">LetsReview</string>
+    <string name="search_hint">search reviews</string>
 </resources>
