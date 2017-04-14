@@ -43,6 +43,9 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String topicName = adapter.getItem(position);
+                Intent intent = new Intent(HomeActivity.this,GetReviewsActivity.class);
+                intent.putExtra("topicName",topicName);
+                startActivity(intent);
             }
         });
 
@@ -74,11 +77,13 @@ public class HomeActivity extends AppCompatActivity {
                 pd.hide();
                 GetTopicsResponse getTopicsResponse = response.body();
                 List<String> topicNames = getTopicsResponse.getTopicNames();
+                adapter.clear();
                 adapter.addAll(topicNames);
             }
 
             @Override
             public void onFailure(Call<GetTopicsResponse> call, Throwable t) {
+                pd.hide();
                 Toast.makeText(HomeActivity.this, "Something went wrong",
                         Toast.LENGTH_LONG).show();
             }
