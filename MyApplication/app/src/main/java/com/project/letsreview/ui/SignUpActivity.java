@@ -1,26 +1,23 @@
 package com.project.letsreview.ui;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.project.letsreview.APIService;
 import com.project.letsreview.R;
 import com.project.letsreview.requests.SignUpRequest;
 import com.project.letsreview.responses.GenericResponse;
+import com.project.letsreview.utils.Util;
 import com.project.letsreview.validators.METValidators;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
-import java.util.concurrent.TimeUnit;
-
-import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -30,6 +27,7 @@ public class SignUpActivity extends AppCompatActivity {
     private MaterialEditText username;
     private MaterialEditText password;
     private Button submitButton;
+    private ProgressDialog pd;
 
     private METValidators validators;
 
@@ -39,7 +37,7 @@ public class SignUpActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
         setTitle(R.string.sign_up);
-        validators = new METValidators(this.getApplicationContext());
+        validators = METValidators.getMETValidators(this.getApplicationContext());
 
         name = (MaterialEditText) findViewById(R.id.name);
         phoneNumber = (MaterialEditText) findViewById(R.id.phone_no);
@@ -65,6 +63,9 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
+        pd = new ProgressDialog(SignUpActivity.this);
+        pd.setCancelable(false);
+
     }
 
     private boolean validate(){
@@ -87,28 +88,42 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void callApi(SignUpRequest request){
-        final OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .readTimeout(60, TimeUnit.SECONDS)
-                .connectTimeout(60, TimeUnit.SECONDS)
-                .build();
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(APIService.BASE_URL)
-                .client(okHttpClient)
-                .addConverterFactory(GsonConverterFactory.create()).build();
-        APIService apiService = retrofit.create(APIService.class);
-        Call<GenericResponse> result = apiService.createUser(request);
+
+        Call<GenericResponse> result = Util.getAPIService().createUser(request);
         result.enqueue(new Callback<GenericResponse>() {
             @Override
             public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {
-                Toast.makeText(SignUpActivity.this, response.body().getMessage(),
-                        Toast.LENGTH_LONG).show();
+
+                String status = response.body().getStatus();
+                if("SUCCESS".equalsIgnoreCase(status)){
+                    pd.hide();
+                    Toast.makeText(SignUpActivity.this, getString(R.string.signup_successful_continue_login),
+                            Toast.LENGTH_LONG).show();
+
+                    submitButton.setText(getString(R.string.next));
+                    submitButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                }else{
+                    pd.hide();
+                    Toast.makeText(SignUpActivity.this, response.body().getMessage(),
+                            Toast.LENGTH_LONG).show();
+                }
             }
+
 
             @Override
             public void onFailure(Call<GenericResponse> call, Throwable t) {
-                Toast.makeText(SignUpActivity.this, "Something went wrong",
+                Toast.makeText(SignUpActivity.this, getString(R.string.something_went_wrong),
                         Toast.LENGTH_LONG).show();
             }
         });
+        pd.setMessage("please wait ...");
+        pd.show();
 
     }
 

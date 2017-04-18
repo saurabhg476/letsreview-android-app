@@ -8,13 +8,34 @@ import java.util.List;
 
 public class GetTopicsResponse extends GenericResponse{
 
-    private List<String> topicNames;
+    private List<TopicResponseObject> topicsList;
 
-    public List<String> getTopicNames() {
-        return topicNames;
+    public List<TopicResponseObject> getTopicsList() {
+        return topicsList;
     }
 
-    public void setTopicNames(List<String> topicNames) {
-        this.topicNames = topicNames;
+    public void setTopicsList(List<TopicResponseObject> topicsList) {
+        this.topicsList = topicsList;
+    }
+
+    public static class TopicResponseObject{
+        private String name;
+        private String summary;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getSummary() {
+            return summary;
+        }
+
+        public void setSummary(String summary) {
+            this.summary = summary;
+        }
     }
 }

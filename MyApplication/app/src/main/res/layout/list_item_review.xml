@@ -21,6 +21,7 @@
             android:id="@+id/reviewer_name"
             android:layout_width="wrap_content"
             android:textSize="20sp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
             android:layout_height="wrap_content" />
 
         <RatingBar

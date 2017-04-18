@@ -19,6 +19,7 @@ public class METValidators {
     private static final String USER_NAME_PATTERN = "^[a-zA-Z0-9]{1,30}$";
     private static final String PASSWORD_PATTERN = "^.{8,30}$";
 
+    private static METValidators instance;
 
     private METValidator nameValidator;
     private METValidator phoneNoValidator;
@@ -26,9 +27,15 @@ public class METValidators {
     private METValidator usernameValidator;
     private METValidator passwordValidator;
 
+    public static METValidators getMETValidators(Context context){
+        if(instance == null){
+            instance = new METValidators(context);
+        }
+        return instance;
+    }
 
 
-    public METValidators(Context context){
+    private METValidators(Context context){
         initialiseNameValidator(context);
     }
 

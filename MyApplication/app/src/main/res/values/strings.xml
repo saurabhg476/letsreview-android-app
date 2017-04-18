@@ -19,4 +19,9 @@
     <string name="title_activity_home">HomeActivity</string>
     <string name="app_label">LetsReview</string>
     <string name="search_hint">search reviews</string>
+    <string name="preferences_file_key">com.project.letsreview.shared.preferences.file</string>
+    <string name="session_token">sessionToken</string>
+    <string name="next">NEXT</string>
+    <string name="signup_successful_continue_login">User has been created successfully. Press next to continue</string>
+    <string name="something_went_wrong">something went wrong</string>
 </resources>

@@ -4,7 +4,9 @@ import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.project.letsreview.R;
+import com.project.letsreview.adapters.TopicsListAdapter;
 import com.project.letsreview.responses.GetTopicsResponse;
 import com.project.letsreview.utils.Util;
 
@@ -26,8 +29,9 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ArrayAdapter<String> adapter;
+    private ArrayAdapter<GetTopicsResponse.TopicResponseObject> adapter;
     private ProgressDialog pd;
+    private FloatingActionButton fab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,14 +39,33 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences sharedPref = HomeActivity.this.getSharedPreferences(getString(R.string.preferences_file_key),Context.MODE_PRIVATE);
+                boolean isSessionTokenPresent = sharedPref.contains(getString(R.string.session_token));
+                if(isSessionTokenPresent){
+                    //launch create review activity
+                }else{
+                    //launch signup activity.
+                    Intent intent = new Intent(HomeActivity.this,SignUpActivity.class);
+                    startActivity(intent);
+                }
+            }
+        });
+
         pd = new ProgressDialog(this);
         ListView listView = (ListView) findViewById(R.id.listview_topics);
-        adapter = new ArrayAdapter<String>(this,R.layout.list_item_topic,R.id.list_item_topic_textview,new ArrayList<String>());
+        adapter = new TopicsListAdapter(this,R.layout.list_item_topic,new ArrayList<GetTopicsResponse.TopicResponseObject>());
         listView.setAdapter(adapter);
+
+
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String topicName = adapter.getItem(position);
+                GetTopicsResponse.TopicResponseObject topic = adapter.getItem(position);
+                String topicName = topic.getName();
                 Intent intent = new Intent(HomeActivity.this,GetReviewsActivity.class);
                 intent.putExtra("topicName",topicName);
                 startActivity(intent);
@@ -76,9 +99,10 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<GetTopicsResponse> call, Response<GetTopicsResponse> response) {
                 pd.hide();
                 GetTopicsResponse getTopicsResponse = response.body();
-                List<String> topicNames = getTopicsResponse.getTopicNames();
+                List<GetTopicsResponse.TopicResponseObject> topicsList = getTopicsResponse.getTopicsList();
+
                 adapter.clear();
-                adapter.addAll(topicNames);
+                adapter.addAll(topicsList);
             }
 
             @Override

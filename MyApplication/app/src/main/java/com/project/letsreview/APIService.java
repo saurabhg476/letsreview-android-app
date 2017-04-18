@@ -1,9 +1,11 @@
 package com.project.letsreview;
 
+import com.project.letsreview.requests.PostLoginRequest;
 import com.project.letsreview.requests.SignUpRequest;
 import com.project.letsreview.responses.GenericResponse;
 import com.project.letsreview.responses.GetReviewsResponse;
 import com.project.letsreview.responses.GetTopicsResponse;
+import com.project.letsreview.responses.PostLoginResponse;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -18,7 +20,7 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    public static final String BASE_URL = "http://172.16.2.27:8080/letsreview/";
+    public static final String BASE_URL = "http://192.168.0.4:8080/letsreview/";
 
     @POST("signup")
     Call<GenericResponse> createUser(@Body SignUpRequest request);
@@ -28,4 +30,7 @@ public interface APIService {
 
     @GET("topics")
     Call<GetTopicsResponse> getTopics(@Query("q") String query);
+
+    @POST("login")
+    Call<PostLoginResponse> login(@Body PostLoginRequest request);
 }
