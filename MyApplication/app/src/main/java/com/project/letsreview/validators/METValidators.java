@@ -49,6 +49,7 @@ public class METValidators {
 
     private METValidator constructValidator(final boolean mandatory, final Pattern pattern, String errorMsg){
         return new METValidator(errorMsg) {
+
             @Override
             public boolean isValid(@NonNull CharSequence text, boolean isEmpty) {
                 if(mandatory){

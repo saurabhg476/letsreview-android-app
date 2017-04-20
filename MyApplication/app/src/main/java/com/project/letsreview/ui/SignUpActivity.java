@@ -5,15 +5,17 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.letsreview.R;
+import com.project.letsreview.components.EditText;
 import com.project.letsreview.requests.SignUpRequest;
 import com.project.letsreview.responses.GenericResponse;
 import com.project.letsreview.utils.Util;
 import com.project.letsreview.validators.METValidators;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -21,12 +23,13 @@ import retrofit2.Response;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private MaterialEditText name;
-    private MaterialEditText phoneNumber;
-    private MaterialEditText emailId;
-    private MaterialEditText username;
-    private MaterialEditText password;
+    private EditText name;
+    private EditText phoneNumber;
+    private EditText emailId;
+    private EditText username;
+    private EditText password;
     private Button submitButton;
+    private TextView alreadyRegistered;
     private ProgressDialog pd;
 
     private METValidators validators;
@@ -36,15 +39,17 @@ public class SignUpActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-        setTitle(R.string.sign_up);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
         validators = METValidators.getMETValidators(this.getApplicationContext());
 
-        name = (MaterialEditText) findViewById(R.id.name);
-        phoneNumber = (MaterialEditText) findViewById(R.id.phone_no);
-        emailId = (MaterialEditText) findViewById(R.id.email_id);
-        username = (MaterialEditText) findViewById(R.id.username);
-        password = (MaterialEditText) findViewById(R.id.password);
+        alreadyRegistered = (TextView) findViewById(R.id.already_registered_text_view);
+        name = (EditText) findViewById(R.id.name);
+        phoneNumber = (EditText) findViewById(R.id.phone_no);
+        emailId = (EditText) findViewById(R.id.email_id);
+        username = (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
         submitButton = (Button) findViewById(R.id.submit_button);
+
 
         name.addValidator(validators.getNameValidator());
         phoneNumber.addValidator(validators.getPhoneNoValidator());
@@ -60,6 +65,13 @@ public class SignUpActivity extends AppCompatActivity {
                     SignUpRequest request = generateRequest();
                     callApi(request);
                 }
+            }
+        });
+
+        alreadyRegistered.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callLoginActivity();
             }
         });
 
@@ -125,6 +137,11 @@ public class SignUpActivity extends AppCompatActivity {
         pd.setMessage("please wait ...");
         pd.show();
 
+    }
+
+    private void callLoginActivity(){
+        Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
+        startActivity(intent);
     }
 
 }

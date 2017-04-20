@@ -3,7 +3,7 @@
     <string name="full_name">Full Name*</string>
     <string name="phone_number">Phone Number</string>
     <string name="email_id">Email Id*</string>
-    <string name="sign_up">Sign Up</string>
+    <string name="sign_up">Sign up</string>
     <string name="password">Password*</string>
     <string name="username">Username*</string>
     <string name="submit">Submit</string>
@@ -24,4 +24,9 @@
     <string name="next">NEXT</string>
     <string name="signup_successful_continue_login">User has been created successfully. Press next to continue</string>
     <string name="something_went_wrong">something went wrong</string>
+    <string name="login">Login</string>
+    <string name="topic">Topic</string>
+    <string name="content">Content (Optional)</string>
+    <string name="already_registered">Already Registered?</string>
+    <string name="rating">Rating:</string>
 </resources>

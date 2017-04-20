@@ -39,6 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+
         fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +47,8 @@ public class HomeActivity extends AppCompatActivity {
                 SharedPreferences sharedPref = HomeActivity.this.getSharedPreferences(getString(R.string.preferences_file_key),Context.MODE_PRIVATE);
                 boolean isSessionTokenPresent = sharedPref.contains(getString(R.string.session_token));
                 if(isSessionTokenPresent){
-                    //launch create review activity
+                    Intent intent = new Intent(HomeActivity.this,PostReviewsActivity.class);
+                    startActivity(intent);
                 }else{
                     //launch signup activity.
                     Intent intent = new Intent(HomeActivity.this,SignUpActivity.class);

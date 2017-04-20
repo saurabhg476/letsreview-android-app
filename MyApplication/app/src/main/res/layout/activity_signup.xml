@@ -5,62 +5,94 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
-
-
-        android:id="@+id/activity_signup"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp">
+        android:fillViewport="true"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/submit_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/name"
+        <LinearLayout
+
+
+            android:id="@+id/activity_signup"
             android:layout_width="match_parent"
-            android:hint="@string/full_name"
-            android:gravity="center"
-            style="@style/materialEditText"
-            android:layout_marginTop="16dp"
-            android:inputType="textPersonName"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/phone_no"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:inputType="phone"
-            style="@style/materialEditText"
-            android:hint="@string/phone_number"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:layout_marginTop="16dp"
+                android:id="@+id/signupTextView"
+                android:text="@string/sign_up"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/email_id"
-            android:layout_width="match_parent"
-            android:inputType="textEmailAddress"
-            android:gravity="center"
-            style="@style/materialEditText"
-            android:hint="@string/email_id"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:clickable="true"
+                android:paddingTop="16dp"
+                android:id="@+id/already_registered_text_view"
+                android:text="@string/already_registered"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:gravity="center"
-            android:inputType="text"
-            style="@style/materialEditText"
-            android:hint="@string/username"
-            android:layout_height="wrap_content" />
 
-        <com.rengwuxian.materialedittext.MaterialEditText
-            android:id="@+id/password"
-            android:layout_width="match_parent"
-            style="@style/materialEditText"
-            android:gravity="center"
-            android:hint="@string/password"
-            android:inputType="textPassword"
-            android:layout_height="wrap_content" />
+            <com.project.letsreview.components.EditText
+                android:id="@+id/name"
+                android:layout_width="match_parent"
+                android:hint="@string/full_name"
+                android:gravity="center"
+                style="@style/materialEditText"
+                android:layout_marginTop="16dp"
+                android:inputType="textPersonName"
+                android:layout_height="wrap_content" />
 
-    </LinearLayout>
+            <com.project.letsreview.components.EditText
+                android:id="@+id/phone_no"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:inputType="phone"
+                style="@style/materialEditText"
+                android:hint="@string/phone_number"
+                android:layout_height="wrap_content" />
+
+            <com.project.letsreview.components.EditText
+                android:id="@+id/email_id"
+                android:layout_width="match_parent"
+                android:inputType="textEmailAddress"
+                android:gravity="center"
+                style="@style/materialEditText"
+                android:hint="@string/email_id"
+                android:layout_height="wrap_content" />
+
+            <com.project.letsreview.components.EditText
+                android:id="@+id/username"
+                android:layout_width="match_parent"
+                android:gravity="center"
+                android:inputType="text"
+                style="@style/materialEditText"
+                android:hint="@string/username"
+                android:layout_height="wrap_content" />
+
+            <com.project.letsreview.components.EditText
+                android:id="@+id/password"
+                android:layout_width="match_parent"
+                style="@style/materialEditText"
+                android:gravity="center"
+                android:hint="@string/password"
+                android:inputType="textPassword"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/submit_button"

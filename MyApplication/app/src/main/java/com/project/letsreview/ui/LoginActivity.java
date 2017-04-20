@@ -2,19 +2,21 @@ package com.project.letsreview.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.project.letsreview.R;
+import com.project.letsreview.components.EditText;
 import com.project.letsreview.requests.PostLoginRequest;
 import com.project.letsreview.responses.PostLoginResponse;
 import com.project.letsreview.utils.Util;
 import com.project.letsreview.validators.METValidators;
-import com.rengwuxian.materialedittext.MaterialEditText;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -22,21 +24,22 @@ import retrofit2.Response;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private MaterialEditText username;
-    private MaterialEditText password;
+    private EditText username;
+    private EditText password;
     private ProgressDialog pd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
 
         //initialise views
         pd = new ProgressDialog(LoginActivity.this);
         pd.setCancelable(false);
 
-        username =  (MaterialEditText) findViewById(R.id.username);
-        password = (MaterialEditText) findViewById(R.id.password);
+        username =  (EditText) findViewById(R.id.username);
+        password = (EditText) findViewById(R.id.password);
         Button submitButton = (Button) findViewById(R.id.submit_button);
 
         //add validators
@@ -68,6 +71,7 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 if("SUCCESS".equalsIgnoreCase(response.body().getStatus())){
                     saveSessionToken(response.body().getSessionToken());
+                    callPostReviewsActivity();
                 }
             }
 
@@ -91,5 +95,10 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = sharedPred.edit();
         editor.putString(getString(R.string.session_token),sessionToken);
         editor.apply();
+    }
+
+    private void callPostReviewsActivity(){
+        Intent intent = new Intent(LoginActivity.this,PostReviewsActivity.class);
+        startActivity(intent);
     }
 }
