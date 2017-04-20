@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.project.letsreview.R;
@@ -38,6 +39,7 @@ public class LoginActivity extends AppCompatActivity {
         pd = new ProgressDialog(LoginActivity.this);
         pd.setCancelable(false);
 
+        TextView noAccountYetTextView = (TextView) findViewById(R.id.no_account_yet_text_view);
         username =  (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         Button submitButton = (Button) findViewById(R.id.submit_button);
@@ -55,6 +57,13 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+        noAccountYetTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callSignUpActivity();
+            }
+        });
     }
 
     private void callAPI(){
@@ -70,7 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 Toast.makeText(LoginActivity.this, response.body().getMessage(),
                         Toast.LENGTH_LONG).show();
                 if("SUCCESS".equalsIgnoreCase(response.body().getStatus())){
-                    saveSessionToken(response.body().getSessionToken());
+                    saveUserInfo(response.body());
                     callPostReviewsActivity();
                 }
             }
@@ -90,15 +99,21 @@ public class LoginActivity extends AppCompatActivity {
         return (username.validate() && password.validate());
     }
 
-    private void saveSessionToken(String sessionToken){
+    private void saveUserInfo(PostLoginResponse response){
         SharedPreferences sharedPred = LoginActivity.this.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPred.edit();
-        editor.putString(getString(R.string.session_token),sessionToken);
+        editor.putString(getString(R.string.session_token),response.getSessionToken());
+        editor.putString(getString(R.string.username),response.getUsername());
         editor.apply();
     }
 
     private void callPostReviewsActivity(){
         Intent intent = new Intent(LoginActivity.this,PostReviewsActivity.class);
+        startActivity(intent);
+    }
+
+    private void callSignUpActivity(){
+        Intent intent = new Intent(this,SignUpActivity.class);
         startActivity(intent);
     }
 }

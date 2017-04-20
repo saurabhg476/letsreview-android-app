@@ -14,10 +14,12 @@ import java.util.regex.Pattern;
  */
 
 public class METValidators {
-    private static final String PERSON_NAME_PATTERN = "^([a-zA-Z]{1})([a-zA-Z. ]{0,29})";
+    private static final String PERSON_NAME_PATTERN = "^([a-zA-Z]{1})([a-zA-Z. ]{0,29})$";
     private static final String PHONE_NUMBER_PATTERN = "^([7-9]{1})([0-9]{9})$";
     private static final String USER_NAME_PATTERN = "^[a-zA-Z0-9]{1,30}$";
     private static final String PASSWORD_PATTERN = "^.{8,30}$";
+    private static final String TOPIC_NAME_PATTERN = "^.{1,30}$";
+    private static final String REVIEW_BODY_PATTERN = "^.{1,5000}$";
 
     private static METValidators instance;
 
@@ -26,6 +28,8 @@ public class METValidators {
     private METValidator emailIdValidator;
     private METValidator usernameValidator;
     private METValidator passwordValidator;
+    private METValidator topicNameValidator;
+    private METValidator reviewBodyValidator;
 
     public static METValidators getMETValidators(Context context){
         if(instance == null){
@@ -45,6 +49,8 @@ public class METValidators {
         emailIdValidator = constructValidator(true,Patterns.EMAIL_ADDRESS,context.getString(R.string.error_msg_valid_email_id));
         usernameValidator = constructValidator(true,Pattern.compile(USER_NAME_PATTERN),context.getString(R.string.error_msg_valid_username));
         passwordValidator = constructValidator(true,Pattern.compile(PASSWORD_PATTERN),context.getString(R.string.error_msg_valid_password));
+        topicNameValidator = constructValidator(true,Pattern.compile(TOPIC_NAME_PATTERN),context.getString(R.string.error_msg_valid_topic_name));
+        reviewBodyValidator = constructValidator(false,Pattern.compile(REVIEW_BODY_PATTERN),context.getString(R.string.error_msg_valid_review));
     }
 
     private METValidator constructValidator(final boolean mandatory, final Pattern pattern, String errorMsg){
@@ -83,6 +89,14 @@ public class METValidators {
 
     public METValidator getPasswordValidator() {
         return passwordValidator;
+    }
+
+    public METValidator getTopicNameValidator() {
+        return topicNameValidator;
+    }
+
+    public METValidator getReviewBodyValidator(){
+        return reviewBodyValidator;
     }
 
 

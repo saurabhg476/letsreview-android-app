@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Letsreview</string>
-    <string name="full_name">Full Name*</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="email_id">Email Id*</string>
+    <string name="full_name_placeholder">Full Name*</string>
+    <string name="phone_number_placeholder">Phone Number</string>
+    <string name="email_id_placeholder">Email Id*</string>
     <string name="sign_up">Sign up</string>
-    <string name="password">Password*</string>
-    <string name="username">Username*</string>
+    <string name="password_placeholder">Password*</string>
+    <string name="username_placeholder">Username*</string>
     <string name="submit">Submit</string>
     <string name="error_msg_valid_name">enter valid name</string>
     <string name="error_msg_valid_phone_no">enter valid phone number</string>
@@ -21,6 +21,7 @@
     <string name="search_hint">search reviews</string>
     <string name="preferences_file_key">com.project.letsreview.shared.preferences.file</string>
     <string name="session_token">sessionToken</string>
+    <string name="username">username</string>
     <string name="next">NEXT</string>
     <string name="signup_successful_continue_login">User has been created successfully. Press next to continue</string>
     <string name="something_went_wrong">something went wrong</string>
@@ -29,4 +30,8 @@
     <string name="content">Content (Optional)</string>
     <string name="already_registered">Already Registered?</string>
     <string name="rating">Rating:</string>
+    <string name="error_msg_valid_topic_name">enter valid topic name</string>
+    <string name="error_msg_valid_review">review body must be between 1-5000 characters</string>
+    <string name="no_account_yet">No account yet? Create one</string>
+    <string name="logout">logout</string>
 </resources>

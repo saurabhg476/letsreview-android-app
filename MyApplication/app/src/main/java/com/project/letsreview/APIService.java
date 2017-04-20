@@ -1,6 +1,7 @@
 package com.project.letsreview;
 
 import com.project.letsreview.requests.PostLoginRequest;
+import com.project.letsreview.requests.PostReviewsRequest;
 import com.project.letsreview.requests.SignUpRequest;
 import com.project.letsreview.responses.GenericResponse;
 import com.project.letsreview.responses.GetReviewsResponse;
@@ -20,13 +21,16 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    public static final String BASE_URL = "http://192.168.0.4:8080/letsreview/";
+    public static final String BASE_URL = "http://192.168.0.5:8080/letsreview/";
 
     @POST("signup")
     Call<GenericResponse> createUser(@Body SignUpRequest request);
 
     @GET("reviews/{topicName}")
     Call<GetReviewsResponse> getReviews(@Path("topicName") String topicName);
+
+    @POST("reviews")
+    Call<GenericResponse> postReviews(@Body PostReviewsRequest request);
 
     @GET("topics")
     Call<GetTopicsResponse> getTopics(@Query("q") String query);
