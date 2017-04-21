@@ -8,17 +8,17 @@ import java.util.List;
 
 public class GetTopicsResponse extends GenericResponse{
 
-    private List<TopicResponseObject> topicsList;
+    private List<Topic> topicsList;
 
-    public List<TopicResponseObject> getTopicsList() {
+    public List<Topic> getTopicsList() {
         return topicsList;
     }
 
-    public void setTopicsList(List<TopicResponseObject> topicsList) {
+    public void setTopicsList(List<Topic> topicsList) {
         this.topicsList = topicsList;
     }
 
-    public static class TopicResponseObject{
+    public static class Topic {
         private String name;
         private String summary;
 

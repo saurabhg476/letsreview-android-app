@@ -17,13 +17,13 @@ import java.util.List;
  * Created by saurabhgupta on 15/04/17.
  */
 
-public class TopicsListAdapter extends ArrayAdapter<GetTopicsResponse.TopicResponseObject>{
+public class TopicsListAdapter extends ArrayAdapter<GetTopicsResponse.Topic>{
 
     public TopicsListAdapter(Context context, int resourceId){
         super(context,resourceId);
     }
 
-    public TopicsListAdapter(Context context, int resource, List<GetTopicsResponse.TopicResponseObject> list){
+    public TopicsListAdapter(Context context, int resource, List<GetTopicsResponse.Topic> list){
         super(context,resource,list);
     }
 
@@ -36,7 +36,7 @@ public class TopicsListAdapter extends ArrayAdapter<GetTopicsResponse.TopicRespo
             v = LayoutInflater.from(getContext()).inflate(R.layout.list_item_topic,null);
         }
 
-        GetTopicsResponse.TopicResponseObject topic = getItem(position);
+        GetTopicsResponse.Topic topic = getItem(position);
 
         if(topic != null){
             TextView name = (TextView) v.findViewById(R.id.textview_topic_name);

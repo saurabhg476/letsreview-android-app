@@ -31,7 +31,7 @@ import retrofit2.Response;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private ArrayAdapter<GetTopicsResponse.TopicResponseObject> adapter;
+    private ArrayAdapter<GetTopicsResponse.Topic> adapter;
     private ProgressDialog pd;
     private FloatingActionButton fab;
 
@@ -92,14 +92,14 @@ public class HomeActivity extends AppCompatActivity {
 
         pd = new ProgressDialog(this);
         ListView listView = (ListView) findViewById(R.id.listview_topics);
-        adapter = new TopicsListAdapter(this,R.layout.list_item_topic,new ArrayList<GetTopicsResponse.TopicResponseObject>());
+        adapter = new TopicsListAdapter(this,R.layout.list_item_topic,new ArrayList<GetTopicsResponse.Topic>());
         listView.setAdapter(adapter);
 
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GetTopicsResponse.TopicResponseObject topic = adapter.getItem(position);
+                GetTopicsResponse.Topic topic = adapter.getItem(position);
                 String topicName = topic.getName();
                 Intent intent = new Intent(HomeActivity.this,GetReviewsActivity.class);
                 intent.putExtra("topicName",topicName);
@@ -134,7 +134,7 @@ public class HomeActivity extends AppCompatActivity {
             public void onResponse(Call<GetTopicsResponse> call, Response<GetTopicsResponse> response) {
                 pd.hide();
                 GetTopicsResponse getTopicsResponse = response.body();
-                List<GetTopicsResponse.TopicResponseObject> topicsList = getTopicsResponse.getTopicsList();
+                List<GetTopicsResponse.Topic> topicsList = getTopicsResponse.getTopicsList();
 
                 adapter.clear();
                 adapter.addAll(topicsList);

@@ -9,16 +9,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
 import com.project.letsreview.R;
+import com.project.letsreview.adapters.TopicsAdapter;
 import com.project.letsreview.components.EditText;
 import com.project.letsreview.requests.PostReviewsRequest;
 import com.project.letsreview.responses.GenericResponse;
+import com.project.letsreview.responses.GetTopicsResponse;
 import com.project.letsreview.utils.Util;
 import com.project.letsreview.validators.METValidators;
+import com.rengwuxian.materialedittext.MaterialAutoCompleteTextView;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -27,7 +31,7 @@ import retrofit2.Response;
 public class PostReviewsActivity extends AppCompatActivity {
 
     private SimpleRatingBar ratingBar;
-    private EditText topicName;
+    private MaterialAutoCompleteTextView topicName;
     private EditText content;
     private ProgressDialog pd;
 
@@ -53,13 +57,23 @@ public class PostReviewsActivity extends AppCompatActivity {
         pd.setCancelable(false);
 
         ratingBar = (SimpleRatingBar) findViewById(R.id.ratingBar);
-        topicName = (EditText) findViewById(R.id.topic_name);
+        topicName = (MaterialAutoCompleteTextView) findViewById(R.id.topic_name);
+        topicName.setThreshold(3);
+        topicName.setAdapter(new TopicsAdapter(this));
+        topicName.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GetTopicsResponse.Topic topic = (GetTopicsResponse.Topic) parent.getItemAtPosition(position);
+                topicName.setText(topic.getName());
+                topicName.setSelection(topic.getName().length());
+            }
+        });
+
         content = (EditText) findViewById(R.id.content);
         Button submitButton = (Button) findViewById(R.id.submit_button);
 
         METValidators validators = METValidators.getMETValidators(this.getApplicationContext());
 
-        topicName.addValidator(validators.getTopicNameValidator());
         content.addValidator(validators.getReviewBodyValidator());
 
         ratingBar.setOnRatingBarChangeListener(new SimpleRatingBar.OnRatingBarChangeListener() {
@@ -73,17 +87,13 @@ public class PostReviewsActivity extends AppCompatActivity {
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(validate()){
+                if(content.validate()){
                     PostReviewsRequest request = constructPostReviewsRequest();
                     callAPI(request);
                 }
             }
         });
 
-    }
-
-    private boolean validate(){
-        return topicName.validate() && content.validate();
     }
 
     private void callAPI(PostReviewsRequest request){

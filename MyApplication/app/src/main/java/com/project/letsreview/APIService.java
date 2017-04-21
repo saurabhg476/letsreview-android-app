@@ -21,7 +21,7 @@ import retrofit2.http.Query;
 
 public interface APIService {
 
-    public static final String BASE_URL = "http://192.168.0.5:8080/letsreview/";
+    public static final String BASE_URL = "http://192.168.0.3:8080/letsreview/";
 
     @POST("signup")
     Call<GenericResponse> createUser(@Body SignUpRequest request);
