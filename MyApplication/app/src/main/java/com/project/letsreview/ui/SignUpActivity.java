@@ -101,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void callApi(SignUpRequest request){
 
-        Call<GenericResponse> result = Util.getAPIService().createUser(request);
+        Call<GenericResponse> result = Util.getAPIService(this).createUser(request);
         result.enqueue(new Callback<GenericResponse>() {
             @Override
             public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {

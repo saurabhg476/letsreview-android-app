@@ -16,11 +16,6 @@
             android:name=".ui.HomeActivity"
             android:launchMode="singleTop">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-            <intent-filter>
                 <action android:name="android.intent.action.SEARCH" />
 
                 <category android:name="android.intent.category.DEFAULT" />
@@ -37,6 +32,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.HomeActivity" />
+        </activity>
+        <activity android:name=".ui.ServerAddressActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
         </activity>
     </application>
 

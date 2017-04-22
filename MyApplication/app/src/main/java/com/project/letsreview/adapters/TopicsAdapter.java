@@ -82,7 +82,7 @@ public class TopicsAdapter extends BaseAdapter implements Filterable{
             @Override
             protected FilterResults performFiltering(CharSequence constraint) {
                 if(constraint != null) {
-                    Call<GetTopicsResponse> call = Util.getAPIService().getTopics(constraint.toString());
+                    Call<GetTopicsResponse> call = Util.getAPIService(mContext).getTopics(constraint.toString());
                     GetTopicsResponse response = null;
                     try {
                         response = call.execute().body();

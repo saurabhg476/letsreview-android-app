@@ -97,7 +97,7 @@ public class PostReviewsActivity extends AppCompatActivity {
     }
 
     private void callAPI(PostReviewsRequest request){
-        Call<GenericResponse> result = Util.getAPIService().postReviews(request);
+        Call<GenericResponse> result = Util.getAPIService(this).postReviews(request);
         result.enqueue(new Callback<GenericResponse>() {
             @Override
             public void onResponse(Call<GenericResponse> call, Response<GenericResponse> response) {

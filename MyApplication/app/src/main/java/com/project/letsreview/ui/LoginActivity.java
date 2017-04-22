@@ -71,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
         request.setUsername(username.getText().toString());
         request.setPassword(password.getText().toString());
 
-        Call<PostLoginResponse> result = Util.getAPIService().login(request);
+        Call<PostLoginResponse> result = Util.getAPIService(this).login(request);
         result.enqueue(new Callback<PostLoginResponse>() {
             @Override
             public void onResponse(Call<PostLoginResponse> call, Response<PostLoginResponse> response) {

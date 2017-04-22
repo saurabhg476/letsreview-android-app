@@ -34,4 +34,5 @@
     <string name="error_msg_valid_review">review body must be between 1-5000 characters</string>
     <string name="no_account_yet">No account yet? Create one</string>
     <string name="logout">logout</string>
+    <string name="server_address">serverAddress</string>
 </resources>

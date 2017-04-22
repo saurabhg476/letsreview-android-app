@@ -128,7 +128,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void callApi(String query){
-        Call<GetTopicsResponse> result = Util.getAPIService().getTopics(query);
+        Call<GetTopicsResponse> result = Util.getAPIService(this).getTopics(query);
         result.enqueue(new Callback<GetTopicsResponse>() {
             @Override
             public void onResponse(Call<GetTopicsResponse> call, Response<GetTopicsResponse> response) {

@@ -43,7 +43,7 @@ public class GetReviewsActivity extends AppCompatActivity {
     }
 
     private void callApi(String topicName){
-        Call<GetReviewsResponse> result = Util.getAPIService().getReviews(topicName);
+        Call<GetReviewsResponse> result = Util.getAPIService(this).getReviews(topicName);
         result.enqueue(new Callback<GetReviewsResponse>() {
             @Override
             public void onResponse(Call<GetReviewsResponse> call, Response<GetReviewsResponse> response) {
