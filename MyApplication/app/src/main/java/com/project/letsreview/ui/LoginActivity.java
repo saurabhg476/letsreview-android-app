@@ -114,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void callSignUpActivity(){
         Intent intent = new Intent(this,SignUpActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }
 }

@@ -10,6 +10,7 @@ import java.util.List;
 public class GetReviewsResponse extends GenericResponse{
 
     private String topicName;
+    private String topicSummary;
     private List<Review> list;
 
     public String getTopicName() {
@@ -18,6 +19,14 @@ public class GetReviewsResponse extends GenericResponse{
 
     public void setTopicName(String topicName) {
         this.topicName = topicName;
+    }
+
+    public String getTopicSummary() {
+        return topicSummary;
+    }
+
+    public void setTopicSummary(String topicSummary) {
+        this.topicSummary = topicSummary;
     }
 
     public List<Review> getList() {

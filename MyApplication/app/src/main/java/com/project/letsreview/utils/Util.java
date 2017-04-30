@@ -23,6 +23,7 @@ public class Util {
 
     private static APIService apiService;
 
+
     public static APIService getAPIService(Context context){
         if(apiService == null)
             initializeAPIService(context);
@@ -36,6 +37,7 @@ public class Util {
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(60, TimeUnit.SECONDS)
+                .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
         String baseUrl = "http://" + serverAddress + ":8080/letsreview/";
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)

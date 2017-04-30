@@ -35,4 +35,12 @@
     <string name="no_account_yet">No account yet? Create one</string>
     <string name="logout">logout</string>
     <string name="server_address">serverAddress</string>
+    <string name="create_review">Create Review</string>
+    <string name="create_topic">Create Topic</string>
+    <string name="name">Name</string>
+    <string name="summary">Summary</string>
+    <string name="description">Description (Optional)</string>
+    <string name="summary_helper_text">2-3 words summary of the topic like An E-commerce company for Amazon</string>
+    <string name="error_msg_valid_summary">summary must be between 1-64 characters</string>
+    <string name="error_msg_valid_topic_description">topic description must be between 1-5000 characters</string>
 </resources>

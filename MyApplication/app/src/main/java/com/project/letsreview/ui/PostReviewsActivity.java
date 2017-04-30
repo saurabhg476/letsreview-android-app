@@ -2,9 +2,9 @@ package com.project.letsreview.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,11 +36,16 @@ public class PostReviewsActivity extends AppCompatActivity {
     private ProgressDialog pd;
 
     @Override
+    public void onBackPressed() {
+        launchHomeActivity();
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
+                launchHomeActivity();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -136,4 +141,10 @@ public class PostReviewsActivity extends AppCompatActivity {
         return request;
     }
 
+
+    private void launchHomeActivity(){
+        Intent intent = new Intent(this,HomeActivity.class);
+        startActivity(intent);
+
+    }
 }

@@ -17,6 +17,8 @@ import com.project.letsreview.responses.GenericResponse;
 import com.project.letsreview.utils.Util;
 import com.project.letsreview.validators.METValidators;
 
+import org.apache.commons.lang3.StringUtils;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +36,11 @@ public class SignUpActivity extends AppCompatActivity {
 
     private METValidators validators;
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        setIntent(intent);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +96,9 @@ public class SignUpActivity extends AppCompatActivity {
 
         request.setName(name.getText().toString());
 
-        if(phoneNumber.getText() != null) {
+        if(StringUtils.isBlank(phoneNumber.getText())) {
+            request.setPhone_no(null);
+        }else{
             request.setPhone_no(phoneNumber.getText().toString());
         }
 
@@ -130,6 +139,7 @@ public class SignUpActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GenericResponse> call, Throwable t) {
+                pd.hide();
                 Toast.makeText(SignUpActivity.this, getString(R.string.something_went_wrong),
                         Toast.LENGTH_LONG).show();
             }

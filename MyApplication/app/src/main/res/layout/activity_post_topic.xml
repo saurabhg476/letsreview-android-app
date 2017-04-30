@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:fillViewport="true"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/submit_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <LinearLayout
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+
+            <com.project.letsreview.components.EditText
+                android:id="@+id/topic_name"
+                android:layout_width="match_parent"
+                android:hint="@string/name"
+                style="@style/materialEditText"
+                android:layout_marginTop="16dp"
+                android:inputType="textPersonName"
+                android:layout_height="wrap_content" />
+
+            <com.project.letsreview.components.EditText
+                android:id="@+id/topic_summary"
+                android:layout_width="match_parent"
+                android:hint="@string/summary"
+                app:met_helperText="@string/summary_helper_text"
+                style="@style/materialEditText"
+                android:layout_marginTop="16dp"
+                android:inputType="textPersonName"
+                android:layout_height="wrap_content" />
+
+            <com.project.letsreview.components.EditText
+                android:paddingTop="20dp"
+                android:id="@+id/topic_description"
+                android:layout_width="match_parent"
+                android:inputType="textMultiLine"
+                android:lines="5"
+                style="@style/materialEditText"
+                android:hint="@string/description"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@android:color/holo_blue_light"
+        android:text="@string/submit"/>
+
+</RelativeLayout>

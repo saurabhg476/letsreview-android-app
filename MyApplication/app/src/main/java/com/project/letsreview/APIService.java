@@ -2,6 +2,7 @@ package com.project.letsreview;
 
 import com.project.letsreview.requests.PostLoginRequest;
 import com.project.letsreview.requests.PostReviewsRequest;
+import com.project.letsreview.requests.PostTopicsRequest;
 import com.project.letsreview.requests.SignUpRequest;
 import com.project.letsreview.responses.GenericResponse;
 import com.project.letsreview.responses.GetReviewsResponse;
@@ -36,4 +37,7 @@ public interface APIService {
 
     @POST("login")
     Call<PostLoginResponse> login(@Body PostLoginRequest request);
+
+    @POST("topics")
+    Call<GenericResponse> postTopics(@Body PostTopicsRequest request);
 }

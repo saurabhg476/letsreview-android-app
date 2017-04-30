@@ -20,6 +20,8 @@ public class METValidators {
     private static final String PASSWORD_PATTERN = "^.{8,30}$";
     private static final String TOPIC_NAME_PATTERN = "^.{1,30}$";
     private static final String REVIEW_BODY_PATTERN = "^.{1,5000}$";
+    private static final String TOPIC_SUMMARY_PATTERN ="^.{1,64}$";
+    private static final String TOPIC_DESCRIPTION_PATTERN = "^.{1,5000}$";
 
     private static METValidators instance;
 
@@ -30,6 +32,8 @@ public class METValidators {
     private METValidator passwordValidator;
     private METValidator topicNameValidator;
     private METValidator reviewBodyValidator;
+    private METValidator topicSummaryValidator;
+    private METValidator topicDescriptionValidator;
 
     public static METValidators getMETValidators(Context context){
         if(instance == null){
@@ -51,6 +55,8 @@ public class METValidators {
         passwordValidator = constructValidator(true,Pattern.compile(PASSWORD_PATTERN),context.getString(R.string.error_msg_valid_password));
         topicNameValidator = constructValidator(true,Pattern.compile(TOPIC_NAME_PATTERN),context.getString(R.string.error_msg_valid_topic_name));
         reviewBodyValidator = constructValidator(false,Pattern.compile(REVIEW_BODY_PATTERN),context.getString(R.string.error_msg_valid_review));
+        topicSummaryValidator = constructValidator(true,Pattern.compile(TOPIC_SUMMARY_PATTERN),context.getString(R.string.error_msg_valid_summary));
+        topicDescriptionValidator = constructValidator(false,Pattern.compile(TOPIC_DESCRIPTION_PATTERN),context.getString(R.string.error_msg_valid_topic_description));
     }
 
     private METValidator constructValidator(final boolean mandatory, final Pattern pattern, String errorMsg){
@@ -97,6 +103,14 @@ public class METValidators {
 
     public METValidator getReviewBodyValidator(){
         return reviewBodyValidator;
+    }
+
+    public METValidator getTopicSummaryValidator(){
+        return topicSummaryValidator;
+    }
+
+    public METValidator getTopicDescriptionValidator(){
+        return topicDescriptionValidator;
     }
 
 

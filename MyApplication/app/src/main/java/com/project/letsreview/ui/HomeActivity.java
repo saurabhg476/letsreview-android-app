@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
@@ -17,6 +16,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.project.letsreview.Constants;
 import com.project.letsreview.R;
 import com.project.letsreview.adapters.TopicsListAdapter;
 import com.project.letsreview.responses.GetTopicsResponse;
@@ -33,7 +34,9 @@ public class HomeActivity extends AppCompatActivity {
 
     private ArrayAdapter<GetTopicsResponse.Topic> adapter;
     private ProgressDialog pd;
-    private FloatingActionButton fab;
+    private FloatingActionButton createTopicButton;
+    private FloatingActionButton createReviewButton;
+    private ListView listView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -48,8 +51,10 @@ public class HomeActivity extends AppCompatActivity {
         if(id == R.id.logout){
             SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preferences_file_key), Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPref.edit();
-            editor.clear();
+            editor.remove(getString(R.string.session_token));
+            editor.remove(getString(R.string.username));
             editor.apply();
+            invalidateOptionsMenu();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -72,46 +77,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-
-        fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences sharedPref = HomeActivity.this.getSharedPreferences(getString(R.string.preferences_file_key),Context.MODE_PRIVATE);
-                boolean isSessionTokenPresent = sharedPref.contains(getString(R.string.session_token));
-                if(isSessionTokenPresent){
-                    Intent intent = new Intent(HomeActivity.this,PostReviewsActivity.class);
-                    startActivity(intent);
-                }else{
-                    //launch signup activity.
-                    Intent intent = new Intent(HomeActivity.this,SignUpActivity.class);
-                    startActivity(intent);
-                }
-            }
-        });
-
-        pd = new ProgressDialog(this);
-        ListView listView = (ListView) findViewById(R.id.listview_topics);
-        adapter = new TopicsListAdapter(this,R.layout.list_item_topic,new ArrayList<GetTopicsResponse.Topic>());
-        listView.setAdapter(adapter);
-
-
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                GetTopicsResponse.Topic topic = adapter.getItem(position);
-                String topicName = topic.getName();
-                Intent intent = new Intent(HomeActivity.this,GetReviewsActivity.class);
-                intent.putExtra("topicName",topicName);
-                startActivity(intent);
-            }
-        });
-
-
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) findViewById(R.id.search);
-        searchView.setIconifiedByDefault(false);
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        initialiseComponents();
     }
 
     private void handleIntent(Intent intent){
@@ -147,7 +113,88 @@ public class HomeActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
         });
-        pd.setMessage("searching ...");
         pd.show();
     }
+
+    private boolean isLoggedIn(){
+        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preferences_file_key),Context.MODE_PRIVATE);
+        return sharedPref.contains(getString(R.string.session_token));
+    }
+
+    private void launchCreateTopicActivity(){
+        Intent intent = new Intent(this,PostTopicsActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchSignUpActivity(){
+        Intent intent = new Intent(this,SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    private void launchPostReviewsActivity(){
+        Intent intent = new Intent(this,PostReviewsActivity.class);
+        startActivity(intent);
+    }
+
+    private void initialiseComponents(){
+        createReviewButton = (FloatingActionButton) findViewById(R.id.action_create_review);
+        createTopicButton = (FloatingActionButton) findViewById(R.id.action_create_topic);
+        setCreateTopicButtonOnClickListener();
+        setCreateReviewButtonOnClickListener();
+        pd = new ProgressDialog(this);
+        pd.setMessage("searching ...");
+        pd.setCancelable(false);
+
+        listView = (ListView) findViewById(R.id.listview_topics);
+        adapter = new TopicsListAdapter(this,R.layout.list_item_topic,new ArrayList<GetTopicsResponse.Topic>());
+        listView.setAdapter(adapter);
+        setListViewOnItemClickListener();
+
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) findViewById(R.id.search);
+        searchView.setIconifiedByDefault(false);
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+    }
+
+    private void setCreateTopicButtonOnClickListener(){
+        createTopicButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isLoggedIn()){
+                    launchCreateTopicActivity();
+                }else{
+                    launchSignUpActivity();
+                }
+            }
+        });
+    }
+
+    private void setCreateReviewButtonOnClickListener(){
+        createReviewButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(isLoggedIn()){
+                    launchPostReviewsActivity();
+                }else{
+                    launchSignUpActivity();
+                }
+            }
+        });
+    }
+
+    private void setListViewOnItemClickListener(){
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                GetTopicsResponse.Topic topic = adapter.getItem(position);
+                Intent intent = new Intent(HomeActivity.this,GetReviewsActivity.class);
+                intent.putExtra(Constants.TOPIC_NAME,topic.getName());
+                intent.putExtra(Constants.TOPIC_SUMMARY,topic.getSummary());
+
+                startActivity(intent);
+            }
+        });
+    }
+
+
 }
