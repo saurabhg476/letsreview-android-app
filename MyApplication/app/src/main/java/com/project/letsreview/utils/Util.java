@@ -46,6 +46,8 @@ public class Util {
         apiService = retrofit.create(APIService.class);
     }
 
-
-
+    public static boolean isLoggedIn(Context context){
+        SharedPreferences sharedPref = context.getSharedPreferences(context.getString(R.string.preferences_file_key),Context.MODE_PRIVATE);
+        return sharedPref.contains(context.getString(R.string.session_token));
+    }
 }

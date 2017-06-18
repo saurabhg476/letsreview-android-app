@@ -116,11 +116,6 @@ public class HomeActivity extends AppCompatActivity {
         pd.show();
     }
 
-    private boolean isLoggedIn(){
-        SharedPreferences sharedPref = this.getSharedPreferences(getString(R.string.preferences_file_key),Context.MODE_PRIVATE);
-        return sharedPref.contains(getString(R.string.session_token));
-    }
-
     private void launchCreateTopicActivity(){
         Intent intent = new Intent(this,PostTopicsActivity.class);
         startActivity(intent);
@@ -160,7 +155,7 @@ public class HomeActivity extends AppCompatActivity {
         createTopicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLoggedIn()){
+                if(Util.isLoggedIn(HomeActivity.this)){
                     launchCreateTopicActivity();
                 }else{
                     launchSignUpActivity();
@@ -173,7 +168,7 @@ public class HomeActivity extends AppCompatActivity {
         createReviewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(isLoggedIn()){
+                if(Util.isLoggedIn(HomeActivity.this)){
                     launchPostReviewsActivity();
                 }else{
                     launchSignUpActivity();

@@ -43,4 +43,5 @@
     <string name="summary_helper_text">2-3 words summary of the topic like An E-commerce company for Amazon</string>
     <string name="error_msg_valid_summary">summary must be between 1-64 characters</string>
     <string name="error_msg_valid_topic_description">topic description must be between 1-5000 characters</string>
+    <string name="exit_message">Are you sure you want to exit current activity? All the content which you entered will be lost.</string>
 </resources>

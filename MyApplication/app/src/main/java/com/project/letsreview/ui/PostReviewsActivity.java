@@ -2,9 +2,11 @@ package com.project.letsreview.ui;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.iarcuschin.simpleratingbar.SimpleRatingBar;
+import com.project.letsreview.Constants;
 import com.project.letsreview.R;
 import com.project.letsreview.adapters.TopicsAdapter;
 import com.project.letsreview.components.EditText;
@@ -37,16 +40,32 @@ public class PostReviewsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        launchHomeActivity();
+        DialogInterface.OnClickListener positiveButtonOnClickListener = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                finish();
+            }
+        };
+
+        new AlertDialog.Builder(this)
+                .setMessage(R.string.exit_message)
+                .setCancelable(false)
+                .setPositiveButton("Yes",positiveButtonOnClickListener)
+                .setNegativeButton("No", null)
+                .show();
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
-                launchHomeActivity();
+                onBackPressed();
                 return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -75,11 +94,19 @@ public class PostReviewsActivity extends AppCompatActivity {
         });
 
         content = (EditText) findViewById(R.id.content);
+
+        //If this activity is called from GetReviewsActivity, then topic name is passed along.
+        if(getIntent().getStringExtra(Constants.TOPIC_NAME) !=  null){
+            topicName.setText(getIntent().getStringExtra(Constants.TOPIC_NAME));
+            content.requestFocus();
+        }
+
         Button submitButton = (Button) findViewById(R.id.submit_button);
 
         METValidators validators = METValidators.getMETValidators(this.getApplicationContext());
 
         content.addValidator(validators.getReviewBodyValidator());
+
 
         ratingBar.setOnRatingBarChangeListener(new SimpleRatingBar.OnRatingBarChangeListener() {
             @Override
@@ -109,6 +136,9 @@ public class PostReviewsActivity extends AppCompatActivity {
                 pd.hide();
                 Toast.makeText(PostReviewsActivity.this, response.body().getMessage(),
                         Toast.LENGTH_LONG).show();
+                if("00".equals(response.body().getCode())){
+                    launchGetReviewsActivity(topicName.getText().toString());
+                }
 
             }
 
@@ -141,10 +171,9 @@ public class PostReviewsActivity extends AppCompatActivity {
         return request;
     }
 
-
-    private void launchHomeActivity(){
-        Intent intent = new Intent(this,HomeActivity.class);
+    public void launchGetReviewsActivity(String topicName){
+        Intent intent = new Intent(this, GetReviewsActivity.class);
+        intent.putExtra(Constants.TOPIC_NAME,topicName);
         startActivity(intent);
-
     }
 }

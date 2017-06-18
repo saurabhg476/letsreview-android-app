@@ -11,13 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.GetReviewsActivity" >
+        <activity
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
+            android:name=".ui.GetReviewsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.HomeActivity" />
         </activity>
 
-        <activity android:name=".ui.SignUpActivity" />
+        <activity
+            android:name=".ui.SignUpActivity"
+            android:noHistory="true"/>
 
         <activity
             android:name=".ui.HomeActivity"
@@ -34,11 +38,13 @@
         </activity>
 
 
-        <activity android:name=".ui.LoginActivity" />
+        <activity android:name=".ui.LoginActivity"
+            android:noHistory="true"/>
 
 
 
         <activity
+            android:noHistory="true"
             android:name=".ui.PostReviewsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -54,7 +60,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.PostTopicsActivity"></activity>
+
+        <activity
+            android:noHistory="true"
+            android:name=".ui.PostTopicsActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.HomeActivity" />
+        </activity>
     </application>
 
 </manifest>
