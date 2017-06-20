@@ -5,11 +5,13 @@ import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -17,6 +19,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.getbase.floatingactionbutton.FloatingActionButton;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.project.letsreview.Constants;
 import com.project.letsreview.R;
 import com.project.letsreview.adapters.TopicsListAdapter;
@@ -36,12 +39,19 @@ public class HomeActivity extends AppCompatActivity {
     private ProgressDialog pd;
     private FloatingActionButton createTopicButton;
     private FloatingActionButton createReviewButton;
+    private FloatingActionsMenu fabMenu;
     private ListView listView;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.home,menu);
         return true;
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        fabMenu.collapseImmediately();
     }
 
     @Override
@@ -132,8 +142,10 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void initialiseComponents(){
+        fabMenu = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
         createReviewButton = (FloatingActionButton) findViewById(R.id.action_create_review);
         createTopicButton = (FloatingActionButton) findViewById(R.id.action_create_topic);
+
         setCreateTopicButtonOnClickListener();
         setCreateReviewButtonOnClickListener();
         pd = new ProgressDialog(this);
@@ -155,6 +167,7 @@ public class HomeActivity extends AppCompatActivity {
         createTopicButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if(Util.isLoggedIn(HomeActivity.this)){
                     launchCreateTopicActivity();
                 }else{
@@ -191,5 +204,19 @@ public class HomeActivity extends AppCompatActivity {
         });
     }
 
+    @Override public boolean dispatchTouchEvent(MotionEvent event){
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            if (fabMenu.isExpanded()) {
+
+                Rect outRect = new Rect();
+                fabMenu.getGlobalVisibleRect(outRect);
+
+                if(!outRect.contains((int)event.getRawX(), (int)event.getRawY()))
+                    fabMenu.collapseImmediately();
+            }
+        }
+
+        return super.dispatchTouchEvent(event);
+    }
 
 }
