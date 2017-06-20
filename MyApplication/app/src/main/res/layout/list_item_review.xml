@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingBottom="8dp"
+    android:paddingBottom="20dp"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
     android:id="@+id/list_item_review"
@@ -41,10 +41,20 @@
     </RelativeLayout>
 
     <TextView
-        android:paddingTop="4dp"
+        android:textSize="12sp"
+        tools:text="12/12/12"
+        android:gravity="center_vertical"
+        android:id="@+id/review_date"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:paddingTop="2dp"
         tools:text="@string/sample_review"
         android:id="@+id/review_body"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+
+
 
 </LinearLayout>

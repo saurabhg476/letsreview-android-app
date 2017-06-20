@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.project.letsreview.R;
 import com.project.letsreview.responses.GetReviewsResponse;
 
+import java.text.DateFormat;
 import java.util.List;
 
 /**
@@ -36,12 +37,14 @@ public class RecycleViewReviewsAdapter extends RecyclerView.Adapter<RecycleViewR
         TextView reviewerName;
         RatingBar reviewRating;
         TextView reviewBody;
+        TextView reviewDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
             reviewerName = (TextView) itemView.findViewById(R.id.reviewer_name);
             reviewRating = (RatingBar) itemView.findViewById(R.id.ratingBar);
             reviewBody = (TextView) itemView.findViewById(R.id.review_body);
+            reviewDate = (TextView) itemView.findViewById(R.id.review_date);
         }
     }
 
@@ -57,6 +60,8 @@ public class RecycleViewReviewsAdapter extends RecyclerView.Adapter<RecycleViewR
         holder.reviewerName.setText(review.getUser().getName());
         holder.reviewRating.setRating(review.getRating());
         holder.reviewBody.setText(review.getBody());
+
+        holder.reviewDate.setText(DateFormat.getDateInstance().format(review.getCreated_on()));
     }
 
     @Override
