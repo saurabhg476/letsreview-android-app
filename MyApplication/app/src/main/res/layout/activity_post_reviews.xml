@@ -19,6 +19,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <TextView
+                android:layout_marginTop="16dp"
+                android:id="@+id/createReviewTextView"
+                android:text="@string/create_review"
+                android:textSize="30sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-condensed"
+                android:layout_gravity="center_horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
 
             <com.rengwuxian.materialedittext.MaterialAutoCompleteTextView
                 android:id="@+id/topic_name"

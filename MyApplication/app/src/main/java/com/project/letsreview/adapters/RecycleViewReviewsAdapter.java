@@ -29,6 +29,9 @@ public class RecycleViewReviewsAdapter extends RecyclerView.Adapter<RecycleViewR
     public void setData(List<GetReviewsResponse.Review> data){
         this.data = data;
     }
+    public List<GetReviewsResponse.Review> getData(){
+        return this.data;
+    }
     public RecycleViewReviewsAdapter(List<GetReviewsResponse.Review> data){
         this.data = data;
     }
