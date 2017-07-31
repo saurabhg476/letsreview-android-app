@@ -125,8 +125,7 @@ public class SignUpActivity extends AppCompatActivity {
                     submitButton.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
-                            startActivity(intent);
+                            callLoginActivity();
                         }
                     });
                 }else{
@@ -151,6 +150,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     private void callLoginActivity(){
         Intent intent = new Intent(SignUpActivity.this,LoginActivity.class);
+        intent.putExtra("function",getIntent().getStringExtra("function"));
         startActivity(intent);
     }
 
