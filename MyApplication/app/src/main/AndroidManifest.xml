@@ -12,6 +12,7 @@
         android:theme="@style/AppTheme">
 
         <activity
+            android:launchMode="singleTask"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"
             android:name=".ui.GetReviewsActivity" >
             <meta-data

@@ -131,8 +131,9 @@ public class HomeActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void launchSignUpActivity(){
+    private void launchSignUpActivity(String function){
         Intent intent = new Intent(this,SignUpActivity.class);
+        intent.putExtra("function",function);
         startActivity(intent);
     }
 
@@ -171,7 +172,7 @@ public class HomeActivity extends AppCompatActivity {
                 if(Util.isLoggedIn(HomeActivity.this)){
                     launchCreateTopicActivity();
                 }else{
-                    launchSignUpActivity();
+                    launchSignUpActivity("createTopic");
                 }
             }
         });
@@ -184,7 +185,7 @@ public class HomeActivity extends AppCompatActivity {
                 if(Util.isLoggedIn(HomeActivity.this)){
                     launchPostReviewsActivity();
                 }else{
-                    launchSignUpActivity();
+                    launchSignUpActivity("createReview");
                 }
             }
         });

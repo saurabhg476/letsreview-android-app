@@ -80,7 +80,12 @@ public class LoginActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
                 if("SUCCESS".equalsIgnoreCase(response.body().getStatus())){
                     saveUserInfo(response.body());
-                    callPostReviewsActivity();
+                    if("createReview".equals(getIntent().getStringExtra("function"))){
+                        callPostReviewsActivity();
+                    }else{
+                        callPostTopicsActivity();
+                    }
+
                 }
             }
 
@@ -112,8 +117,14 @@ public class LoginActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void callPostTopicsActivity(){
+        Intent intent = new Intent(LoginActivity.this, PostTopicsActivity.class);
+        startActivity(intent);
+    }
+
     private void callSignUpActivity(){
         Intent intent = new Intent(this,SignUpActivity.class);
+        intent.putExtra("function",getIntent().getStringExtra("function"));
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
     }

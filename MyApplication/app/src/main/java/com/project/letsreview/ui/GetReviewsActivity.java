@@ -48,7 +48,20 @@ public class GetReviewsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_get_reviews);
         createReviewButton = (FloatingActionButton) findViewById(R.id.action_create_review);
         initialiseComponents();
+        callApi(sTopicName,0,20);
 
+    }
+
+    private void handleIntent(){
+        adapter.setData(new ArrayList<GetReviewsResponse.Review>());
+        adapter.notifyDataSetChanged();
+        callApi(sTopicName,0,20);
+    }
+
+    @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        handleIntent();
     }
 
     private void callApi(String sTopicName, int page, int perPage){
@@ -112,8 +125,6 @@ public class GetReviewsActivity extends AppCompatActivity {
                 callApi(sTopicName,page,20);
             }
         });
-        callApi(sTopicName,0,20);
-
         setCreateReviewButtonOnClickListener();
     }
 
