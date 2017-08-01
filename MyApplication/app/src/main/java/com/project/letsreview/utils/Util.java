@@ -33,13 +33,15 @@ public class Util {
 
     private static void initializeAPIService(Context context){
         SharedPreferences sharedPref = context.getSharedPreferences(context.getString(R.string.preferences_file_key), Context.MODE_PRIVATE);
-        String serverAddress = sharedPref.getString(context.getString(R.string.server_address),"");
+
+        //aws address for prod branch
+        String serverAddress = "letsreview.us-east-2.elasticbeanstalk.com";
         OkHttpClient okHttpClient = new OkHttpClient.Builder()
                 .readTimeout(60, TimeUnit.SECONDS)
                 .connectTimeout(60, TimeUnit.SECONDS)
                 .writeTimeout(60,TimeUnit.SECONDS)
                 .build();
-        String baseUrl = "http://" + serverAddress + ":8080/letsreview/";
+        String baseUrl = "http://" + serverAddress +"/";
         Retrofit retrofit = new Retrofit.Builder().baseUrl(baseUrl)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create()).build();
