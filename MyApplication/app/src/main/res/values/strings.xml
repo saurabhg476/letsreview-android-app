@@ -18,7 +18,7 @@
     <string name="sample_name">Saurabh Gupta</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="app_label">LetsReview</string>
-    <string name="search_hint">search reviews</string>
+    <string name="search_hint">search topics</string>
     <string name="preferences_file_key">com.project.letsreview.shared.preferences.file</string>
     <string name="session_token">sessionToken</string>
     <string name="username">username</string>

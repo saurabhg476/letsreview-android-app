@@ -111,9 +111,13 @@ public class HomeActivity extends AppCompatActivity {
                 pd.hide();
                 GetTopicsResponse getTopicsResponse = response.body();
                 List<GetTopicsResponse.Topic> topicsList = getTopicsResponse.getTopicsList();
-
                 adapter.clear();
                 adapter.addAll(topicsList);
+
+                if(topicsList.isEmpty()){
+                    Toast.makeText(HomeActivity.this, "No topics found for given search!",
+                            Toast.LENGTH_LONG).show();
+                }
             }
 
             @Override
