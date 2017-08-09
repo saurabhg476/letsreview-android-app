@@ -18,7 +18,7 @@
     >
         <ImageView
             android:paddingTop="16dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/defualt_app_icon"
             app:layout_scrollFlags="scroll"
             tools:contentDescription="topic icon"
             android:contentDescription="topic icon"
