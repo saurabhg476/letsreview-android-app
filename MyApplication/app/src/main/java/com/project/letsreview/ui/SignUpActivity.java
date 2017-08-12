@@ -85,6 +85,8 @@ public class SignUpActivity extends AppCompatActivity {
         pd = new ProgressDialog(SignUpActivity.this);
         pd.setCancelable(false);
 
+
+
     }
 
     private boolean validate(){

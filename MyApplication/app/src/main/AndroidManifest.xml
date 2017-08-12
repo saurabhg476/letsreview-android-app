@@ -10,20 +10,17 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
+            android:name=".ui.GetReviewsActivity"
             android:launchMode="singleTask"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"
-            android:name=".ui.GetReviewsActivity" >
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.HomeActivity" />
         </activity>
-
         <activity
             android:name=".ui.SignUpActivity"
-            android:noHistory="true"/>
-
+            android:noHistory="true" />
         <activity
             android:name=".ui.HomeActivity"
             android:launchMode="singleTop">
@@ -37,37 +34,34 @@
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
         </activity>
-
-
-        <activity android:name=".ui.LoginActivity"
-            android:noHistory="true"/>
-
-
-
         <activity
-            android:noHistory="true"
-            android:name=".ui.PostReviewsActivity">
+            android:name=".ui.LoginActivity"
+            android:noHistory="true" />
+        <activity
+            android:name=".ui.PostReviewsActivity"
+            android:noHistory="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".ui.HomeActivity" />
         </activity>
-
-
-
         <activity android:name=".ui.ServerAddressActivity">
+
+        </activity>
+        <activity
+            android:name=".ui.PostTopicsActivity"
+            android:noHistory="true">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".ui.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".ui.FirstSignInActivity"
+            android:label="@string/title_activity_first_sign_up"
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-
-        <activity
-            android:noHistory="true"
-            android:name=".ui.PostTopicsActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".ui.HomeActivity" />
         </activity>
     </application>
 
