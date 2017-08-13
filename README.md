@@ -1,6 +1,6 @@
 # letsreview-android-app
 
-An android app for reviews. Any one can share reviews for any topic.
+An android app for reviews. Any one can share reviews for any topic. The server side code for this app is available at https://github.com/saurabhg476/letsreview.
 
 
 # Screenshots
